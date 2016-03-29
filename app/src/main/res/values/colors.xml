@@ -3,6 +3,7 @@
     <color name="colorPrimary">#FF9800</color>
     <color name="colorPrimaryDark">#F57C00</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="photo_placeholder">#ccc</color>
+    <color name="photo_placeholder">#263238</color>
+    <color name="subtitle">#E0E0E0</color>
 
 </resources>

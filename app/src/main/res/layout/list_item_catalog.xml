@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!--suppress AndroidLintContentDescription -->
         <ImageView
             android:id="@+id/thumbnail"
             android:layout_width="match_parent"
@@ -25,7 +24,7 @@
             android:background="@color/photo_placeholder" />
 
         <TextView
-            android:id="@+id/article_title"
+            android:id="@+id/beer_title"
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,19 +33,20 @@
             android:paddingRight="16dp"
             android:paddingBottom="4dp"
             android:fontFamily="sans-serif"
+            android:textColor="@android:color/white"
             android:textStyle="normal"
             android:ellipsize="end"
             android:maxLines="4" />
 
         <TextView
-            android:id="@+id/article_subtitle"
+            android:id="@+id/beer_origen"
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingBottom="16dp"
-            android:textColor="#6000"
+            android:textColor="@color/subtitle"
             android:fontFamily="sans-serif-condensed"
             android:maxLines="1"
             android:singleLine="true"
