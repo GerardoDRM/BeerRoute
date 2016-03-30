@@ -234,7 +234,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     }
 
     private void setBackGroundBeer(String url) {
-        Picasso.with(getContext()).load(url).fit().centerCrop().transform(PaletteTransformation.instance()).into(mPhoto, new Callback.EmptyCallback() {
+        Picasso.with(getContext()).load(url).fit().centerCrop().transform(PaletteTransformation.instance()).tag(getContext()).into(mPhoto, new Callback.EmptyCallback() {
             @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onSuccess() {

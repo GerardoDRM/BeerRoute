@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginRight="@dimen/details_margin_sides"
+android:layout_marginLeft="@dimen/details_margin_sides"
+android:layout_marginStart="@dimen/details_margin_sides"
+android:layout_marginEnd="@dimen/details_margin_sides"
+android:orientation="vertical">
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/beer_origen"
+    android:fontFamily="sans-serif-condensed"
+    android:textColor="@android:color/white"
+    android:textStyle="normal"
+    android:textSize="20sp"
+    />
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fontFamily="sans-serif-condensed"
+    android:textColor="@android:color/white"
+    android:textStyle="normal"
+    android:textSize="18sp"
+    android:id="@+id/beer_overview" />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="2"
+    android:layout_marginTop="@dimen/top_description"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/alcohol"
+        android:contentDescription="@string/alcohol" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/beer_alcohol"
+        android:fontFamily="sans-serif"
+        android:textColor="@android:color/white"
+        android:textStyle="italic"
+        android:textSize="18sp"
+
+        />
+
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="2"
+    android:layout_marginTop="@dimen/top_description"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/aroma"
+        android:contentDescription="@string/aroma_list" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/beer_aroma"
+        android:fontFamily="sans-serif"
+        android:textColor="@android:color/white"
+        android:textStyle="italic"
+        android:textSize="18sp"
+
+        />
+
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="2"
+    android:layout_marginTop="@dimen/top_description"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/taste"
+        android:contentDescription="@string/taste_list" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/beer_taste"
+        android:fontFamily="sans-serif"
+        android:textColor="@android:color/white"
+        android:textStyle="italic"
+        android:textSize="18sp"
+
+        />
+
+</LinearLayout>
+
+</LinearLayout>

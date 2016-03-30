@@ -1,7 +1,13 @@
 <resources>
     <!-- list -->
     <integer name="list_column_count">2</integer>
-
-
+    <dimen name="image_detail_height">360dp</dimen>
+    <dimen name="details_margin_sides">32dp</dimen>
+    <dimen name="list_side_margin">4dp</dimen>
+    <item type="layout" name="detail_content">@layout/content_detail</item>
+    <dimen name="card_margin_sides">8dp</dimen>
+    <bool name="detail_is_card">false</bool>
+    <dimen name="beer_back">200dp</dimen>
+    <dimen name="beer_back_height">360dp</dimen>
 
 </resources>

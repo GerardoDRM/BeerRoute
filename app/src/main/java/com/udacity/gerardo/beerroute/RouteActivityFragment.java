@@ -123,7 +123,7 @@ public class RouteActivityFragment extends Fragment {
         TextView origen = (TextView) beersView.findViewById(R.id.beer_origen);
         origen.setText(beer.getOrigen());
         ImageView photo = (ImageView) beersView.findViewById(R.id.thumbnail);
-        Picasso.with(getContext()).load(beer.getImage()).transform(new CircleTransform()).into(photo);
+        Picasso.with(getContext()).load(beer.getImage()).fit().centerCrop().transform(new CircleTransform()).tag(getContext()).into(photo);
 
         cardView.addView(beersView);
     }

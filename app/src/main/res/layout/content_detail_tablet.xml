@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/detail_card_top"
+    android:layout_marginEnd="@dimen/details_margin_sides"
+    android:layout_marginLeft="@dimen/details_margin_sides"
+    android:layout_marginRight="@dimen/details_margin_sides"
+    android:layout_marginStart="@dimen/details_margin_sides"
+    android:layout_marginTop="@dimen/detail_card_top"
+    android:clickable="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/photo_placeholder"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/beer_origen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="@android:color/white"
+            android:textSize="28sp"
+            android:layout_marginLeft="@dimen/card_text"
+            android:layout_marginStart="@dimen/card_text"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/beer_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            android:layout_marginLeft="@dimen/card_text"
+            android:layout_marginStart="@dimen/card_text"
+            android:textStyle="normal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/top_description"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="@string/alcohol"
+                android:src="@drawable/alcohol" />
+
+            <TextView
+                android:id="@+id/beer_alcohol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="italic"
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/top_description"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="@string/aroma_list"
+                android:src="@drawable/aroma" />
+
+            <TextView
+                android:id="@+id/beer_aroma"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="italic"
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/top_description"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="@string/taste_list"
+                android:src="@drawable/taste" />
+
+            <TextView
+                android:id="@+id/beer_taste"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="italic"
+
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

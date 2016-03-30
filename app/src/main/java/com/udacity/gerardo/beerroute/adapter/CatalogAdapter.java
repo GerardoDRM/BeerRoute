@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.graphics.Palette;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,17 +49,37 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
     public void onBindViewHolder(final CatalogAdapter.ViewHolder holder, final int position) {
         holder.mName.setText(mBeers.get(position).getName());
         holder.mOrigen.setText(mBeers.get(position).getOrigen());
+        boolean isTablet = mContext.getResources().getBoolean(R.bool.detail_is_card);
         // Get image with Picasso
-        Picasso.with(mContext).load(mBeers.get(position).getImage()).transform(PaletteTransformation.instance()).into(holder.mThumbnail, new Callback.EmptyCallback() {
-            @Override
-            public void onSuccess() {
-                Bitmap bitmap = ((BitmapDrawable) holder.mThumbnail.getDrawable()).getBitmap();
-                Palette palette = PaletteTransformation.getPalette(bitmap);
-                holder.mView.setBackgroundColor(palette.getMutedColor(0xFF333333));
+        if(isTablet) {
+            Picasso.with(mContext).load(mBeers.get(position).getImage())
+                    .resize(30, 30).centerCrop()
+                    .transform(PaletteTransformation.instance()).tag(mContext).into(holder.mThumbnail, new Callback.EmptyCallback() {
+                @Override
+                public void onSuccess() {
+                    Bitmap bitmap = ((BitmapDrawable) holder.mThumbnail.getDrawable()).getBitmap();
+                    Palette palette = PaletteTransformation.getPalette(bitmap);
+                    CardView cd = (CardView) holder.mView;
+                    cd.setCardBackgroundColor(palette.getMutedColor(0xFF333333));
 
-            }
-        });
 
+                }
+            });
+
+        } else {
+            Picasso.with(mContext).load(mBeers.get(position).getImage())
+                    .transform(PaletteTransformation.instance()).tag(mContext).into(holder.mThumbnail, new Callback.EmptyCallback() {
+                @Override
+                public void onSuccess() {
+                    Bitmap bitmap = ((BitmapDrawable) holder.mThumbnail.getDrawable()).getBitmap();
+                    Palette palette = PaletteTransformation.getPalette(bitmap);
+                    CardView cd = (CardView) holder.mView;
+                    cd.setCardBackgroundColor(palette.getMutedColor(0xFF333333));
+
+
+                }
+            });
+        }
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

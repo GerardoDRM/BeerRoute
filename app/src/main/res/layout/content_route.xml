@@ -11,8 +11,9 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_marginTop="100dp"
+            android:layout_width="@dimen/beer_back"
+            android:layout_height="@dimen/beer_back_height"
             android:contentDescription="@string/beer_background"
             android:scaleType="centerCrop"
             android:src="@drawable/beer" />
