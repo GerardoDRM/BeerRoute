@@ -128,12 +128,14 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     }
 
     public void getFavorites() {
-        mCursorAdapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(mCursorAdapter);
-        int columnCount = getResources().getInteger(R.integer.list_column_count);
-        StaggeredGridLayoutManager sglm =
-                new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(sglm);
+        if(mCursorAdapter.getItemCount() > 0 && !mCursorAdapter.hasStableIds()) {
+            mCursorAdapter.setHasStableIds(true);
+            mRecyclerView.setAdapter(mCursorAdapter);
+            int columnCount = getResources().getInteger(R.integer.list_column_count);
+            StaggeredGridLayoutManager sglm =
+                    new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
+            mRecyclerView.setLayoutManager(sglm);
+        }
     }
 
     public void getBeers(int elements) {
@@ -185,7 +187,6 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mCursorAdapter.swapCursor(data);
-        mCursorAdapter.setHasStableIds(true);
 
     }
 

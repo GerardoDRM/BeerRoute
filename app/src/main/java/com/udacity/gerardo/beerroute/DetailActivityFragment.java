@@ -2,6 +2,7 @@ package com.udacity.gerardo.beerroute;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -77,6 +78,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private String mSharedName;
     private static final int DETAIL_LOADER = 0;
     private Uri mUri;
+    public static final String ACTION_DATA_UPDATED =
+            "com.udacity.gerardo.beerroute.ACTION_DATA_UPDATED";
     private static final String[] BEER_COLUMNS = {
             BeerColumns._ID,
             BeerColumns.NAME,
@@ -185,11 +188,21 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 }
 
                 movie.close();
+                // Update Widget when changes database storage
+                updateWidget();
 
             }
         });
 
         return rootView;
+    }
+
+    private void updateWidget() {
+        Context context = getContext();
+        // Setting the package ensures that only components in our app will receive the broadcast
+        Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED)
+                .setPackage(context.getPackageName());
+        context.sendBroadcast(dataUpdatedIntent);
     }
 
     private void showBeerInfo() {
@@ -199,7 +212,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mCollapsing.setTitle(mBeer.getName());
         mOrigen.setText(mBeer.getOrigen());
         mOverview.setText(mBeer.getOverview());
-        mAlcohol.setText(mBeer.getAlcohol() + "%");
+        mAlcohol.setText(getContext().getResources().getString(R.string.alcohol_percent, mBeer.getAlcohol()));
 
         List<String> taste = mBeer.getTaste();
         List<String> aroma = mBeer.getAroma();
@@ -317,7 +330,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         // Adding overview
         mOverview.setText(overview);
         // Adding alcohol
-        mAlcohol.setText(String.valueOf(alcohol));
+        mAlcohol.setText(getContext().getResources().getString(R.string.alcohol_percent, (alcohol)));
         // Adding image
         setBackGroundBeer(image);
         // Adding aroma

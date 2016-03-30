@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/tools">
     <string name="app_name">BeerRoute</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_detail">DetailActivity</string>
@@ -16,6 +16,8 @@
     <string name="action_favorites">Favorites</string>
     <string name="transition_photo">transition</string>
     <string name="action_share">Share</string>
+    <string name="alcohol_percent">(<xliff:g id="percent">%1$.1f</xliff:g>) \% alcohol</string>
+    <string name="empty_data">No beers to display</string>
 
 
 </resources>

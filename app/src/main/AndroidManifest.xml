@@ -70,6 +70,23 @@
             android:name=".data.generated.BeerProvider"
             android:exported="false"/>
 
+        <receiver android:name=".widget.BeerListWidget" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.udacity.gerardo.beerroute.ACTION_DATA_UPDATED" />
+                />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/list_widget_provider_info" />
+        </receiver>
+
+        <service android:name=".widget.BeerListWidgetService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+
+
     </application>
 
 </manifest>
