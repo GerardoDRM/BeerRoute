@@ -1,30 +1,36 @@
 package com.udacity.gerardo.beerroute;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+
+import com.udacity.gerardo.beerroute.utils.GeneralConst;
 
 public class RouteActivity extends AppCompatActivity {
+
+    private final String ROUTE_FRAGMENT = "ROUTE_FRAGMENT";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        if (savedInstanceState == null) {
+            Intent intent = this.getIntent();
+            if (intent.getExtras().containsKey(GeneralConst.BEER_KEY)) {
+                RouteActivityFragment route = new RouteActivityFragment();
+                Bundle args = new Bundle();
+                args.putString(GeneralConst.BEER_KEY, intent.getStringExtra(GeneralConst.BEER_KEY));
+                route.setArguments(args);
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.fragment_route, route, ROUTE_FRAGMENT)
+                        .commit();
+
             }
-        });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        }
+
     }
 
 }

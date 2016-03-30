@@ -26,6 +26,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.udacity.gerardo.beerroute.model.Beer;
@@ -54,6 +55,9 @@ public class DetailActivityFragment extends Fragment {
     NestedScrollView mNestedScroll;
     @Bind(R.id.collapsing_toolbar)
     CollapsingToolbarLayout mCollapsing;
+    @Bind(R.id.action_share) FloatingActionButton mShareAction;
+    @Bind(R.id.action_love) FloatingActionButton mLoveAction;
+    @Bind(R.id.action_route) FloatingActionButton mRouteAction;
 
 
     private Beer mBeer;
@@ -93,6 +97,20 @@ public class DetailActivityFragment extends Fragment {
 //        } else if (intent.getData() != null) {
 //            mUri = intent.getData();
 //        }
+
+        // Fab buttons
+        mRouteAction.setIcon(R.drawable.ic_timeline_white_24dp);
+        mRouteAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), RouteActivity.class);
+                i.putExtra(GeneralConst.BEER_KEY, mBeer.getId());
+                startActivity(i);
+            }
+        });
+        mShareAction.setIcon(R.drawable.ic_share_variant_white_24dp);
+        mLoveAction.setIcon(R.drawable.ic_favorite_white_24dp);
+
         return rootView;
     }
 
@@ -156,7 +174,6 @@ public class DetailActivityFragment extends Fragment {
                 mCollapsing.setBackgroundColor(mutedColor);
                 mCollapsing.setContentScrimColor(palette.getMutedColor(mutedColor));
                 mCollapsing.setStatusBarScrimColor(palette.getDarkMutedColor( palette.getMutedColor(0xFF333333)));
-
 
             }
         });

@@ -94,8 +94,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@android:drawable/ic_dialog_map"
-                android:contentDescription="@string/taste_list" />
+                android:src="@drawable/alcohol"
+                android:contentDescription="@string/alcohol" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -122,8 +122,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@android:drawable/ic_dialog_map"
-                    android:contentDescription="@string/taste_list" />
+                    android:src="@drawable/aroma"
+                    android:contentDescription="@string/aroma_list" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -150,7 +150,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@android:drawable/ic_dialog_map"
+                    android:src="@drawable/taste"
                     android:contentDescription="@string/taste_list" />
 
                 <TextView
@@ -172,12 +172,50 @@
     </android.support.v4.widget.NestedScrollView>
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/multiple_actions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        app:fab_addButtonColorNormal="@color/colorAccent"
+        app:fab_addButtonColorPressed="@color/fab_pressed"
+        app:fab_addButtonPlusIconColor="@android:color/white"
+        app:fab_labelStyle="@style/menu_labels_style"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+        android:layout_margin="@dimen/fab_margin">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_route"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="@color/fab_pressed"
+            app:fab_title="@string/route"
+            app:fab_size="mini"
+            />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_love"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_size="mini"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="@color/fab_pressed"
+            app:fab_title="@string/love"
+            />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_size="mini"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="@color/fab_pressed"
+            app:fab_title="@string/share"
+            />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </android.support.design.widget.CoordinatorLayout>

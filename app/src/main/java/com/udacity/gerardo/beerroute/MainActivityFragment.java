@@ -20,6 +20,7 @@ import com.udacity.gerardo.beerroute.API.BeerApi;
 import com.udacity.gerardo.beerroute.adapter.CatalogAdapter;
 import com.udacity.gerardo.beerroute.model.Beer;
 import com.udacity.gerardo.beerroute.model.BeerResult;
+import com.udacity.gerardo.beerroute.utils.GeneralConst;
 
 import java.util.ArrayList;
 
@@ -51,7 +52,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     }
 
     public MainActivityFragment() {
-        this.BASE_URL = "http://192.168.1.68:5000/";
+        this.BASE_URL = GeneralConst.BASE_URL;
     }
 
     @Override

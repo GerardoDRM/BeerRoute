@@ -1,5 +1,6 @@
 package com.udacity.gerardo.beerroute.API;
 
+import com.udacity.gerardo.beerroute.model.Beer;
 import com.udacity.gerardo.beerroute.model.BeerResult;
 
 import retrofit.Call;
@@ -17,8 +18,8 @@ public interface BeerApi {
     Call<BeerResult> getBeers(@Path("page") int page);
 
     @GET("beers/{id}")
-    Call<BeerResult> getBeer(@Path("id") String id);
+    Call<Beer> getBeer(@Path("id") String id);
 
     @GET("beers/{id}/route")
-    Call<BeerResult> getRoute(@Path("id") String id);
+    Call<Beer> getRoute(@Path("id") String id);
 }

@@ -12,14 +12,14 @@ import java.util.List;
 public class Beer implements Parcelable{
 
     private String image;
-    private String id;
+    private String _id;
     private String origen;
     private String overview;
     private double alcohol;
     private List<String> taste;
     private List<String> aroma;
-    private ArrayList mToContinue;
-    private ArrayList mToEnd;
+    private List<Beer> to_continue = new ArrayList<Beer>(); ;
+    private List<Beer> to_end = new ArrayList<Beer>(); ;
     private String name;
 
 
@@ -27,7 +27,7 @@ public class Beer implements Parcelable{
 
 
     protected Beer(Parcel in) {
-        id = in.readString();
+        _id = in.readString();
         alcohol = in.readDouble();
         image = in.readString();
         name = in.readString();
@@ -35,9 +35,8 @@ public class Beer implements Parcelable{
         overview = in.readString();
         aroma = in.createStringArrayList();
         taste = in.createStringArrayList();
-
-//        mToContinue = in.readArrayList(null);
-//        mToEnd = in.readArrayList(null);
+        to_continue = in.createTypedArrayList(Beer.CREATOR);
+        to_end = in.createTypedArrayList(Beer.CREATOR);
 
     }
 
@@ -66,11 +65,11 @@ public class Beer implements Parcelable{
     }
 
     public String getId() {
-        return id;
+        return _id;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this._id = id;
     }
 
     public double getAlcohol() {
@@ -97,20 +96,20 @@ public class Beer implements Parcelable{
         this.aroma = aroma;
     }
 
-    public ArrayList getmToContinue() {
-        return mToContinue;
+    public List<Beer> getmToContinue() {
+        return to_continue;
     }
 
     public void setmToContinue(ArrayList mToContinue) {
-        this.mToContinue = mToContinue;
+        this.to_continue = mToContinue;
     }
 
-    public ArrayList getmToEnd() {
-        return mToEnd;
+    public List<Beer> getmToEnd() {
+        return to_end;
     }
 
     public void setmToEnd(ArrayList mToEnd) {
-        this.mToEnd = mToEnd;
+        this.to_end = mToEnd;
     }
 
     public String getName() {
@@ -132,7 +131,7 @@ public class Beer implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
+        dest.writeString(_id);
         dest.writeDouble(alcohol);
         dest.writeString(image);
         dest.writeString(name);
@@ -140,9 +139,8 @@ public class Beer implements Parcelable{
         dest.writeString(overview);
         dest.writeStringList(aroma);
         dest.writeStringList(taste);
-
-//        dest.writeList(mToContinue);
-//        dest.writeList(mToEnd);
+        dest.writeTypedList(to_continue);
+        dest.writeTypedList(to_end);
 
     }
 
