@@ -73,6 +73,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
 
     private Beer mBeer;
+    private String mBeerId;
+    private String mSharedName;
     private static final int DETAIL_LOADER = 0;
     private Uri mUri;
     private static final String[] BEER_COLUMNS = {
@@ -134,7 +136,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), RouteActivity.class);
-                i.putExtra(GeneralConst.BEER_KEY, mBeer.getId());
+                i.putExtra(GeneralConst.BEER_KEY, mBeerId);
                 Bundle bundle = null;
                 // Adding Explode Exit Transition
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
@@ -147,12 +149,23 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             }
         });
         mShareAction.setIcon(R.drawable.ic_share_variant_white_24dp);
+        // Sharing info with external app
+        mShareAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(Intent.EXTRA_TEXT, mSharedName);
+                startActivity(Intent.createChooser(sharingIntent,  getString(R.string.action_share)));
+
+            }
+        });
         mLoveAction.setIcon(R.drawable.ic_favorite_white_24dp);
         mLoveAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Check if beer is stored on our database
-                Cursor movie = getActivity().getContentResolver().query(BeerProvider.Beers.withId(mBeer.getId()),
+                Cursor movie = getActivity().getContentResolver().query(BeerProvider.Beers.withId(mBeerId),
                         null, null, null, null);
                 // If there isn't data then it means that this beer can be
                 // stored
@@ -167,7 +180,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                     // Changing to clean
                     mLoveAction.setColorFilter(0xffffffff, PorterDuff.Mode.MULTIPLY);
                     // Delete Data using content provider
-                    DatabaseHelperOp.deleteBeer(mBeer.getId(), getActivity());
+                    DatabaseHelperOp.deleteBeer(mBeerId, getActivity());
 
                 }
 
@@ -180,7 +193,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     }
 
     private void showBeerInfo() {
-        checkStoredMovie(mBeer.getId());
+        mBeerId = mBeer.getId();
+        mSharedName = mBeer.getName();
+        checkStoredBeer(mBeerId);
         mCollapsing.setTitle(mBeer.getName());
         mOrigen.setText(mBeer.getOrigen());
         mOverview.setText(mBeer.getOverview());
@@ -249,10 +264,10 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         });
     }
 
-    private void checkStoredMovie(String id) {
-        Cursor movie = getActivity().getContentResolver().query(BeerProvider.Beers.withId(id),
+    private void checkStoredBeer(String id) {
+        Cursor beer = getActivity().getContentResolver().query(BeerProvider.Beers.withId(id),
                 null, null, null, null);
-        if (movie.getCount() > 0) {
+        if (beer.getCount() > 0) {
             mLoveAction.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
         }
     }
@@ -279,9 +294,10 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data != null && data.moveToFirst()) {
             mLoveAction.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
-            String id = data.getString(data.getColumnIndex(BeerColumns._ID));
+            mBeerId = data.getString(data.getColumnIndex(BeerColumns._ID));
             // Get beer data
             String name = data.getString(data.getColumnIndex(BeerColumns.NAME));
+            mSharedName = name;
             String origen = data.getString(data.getColumnIndex(BeerColumns.ORIGEN));
             String overview = data.getString(data.getColumnIndex(BeerColumns.OVERVIEW));
             String image = data.getString(data.getColumnIndex(BeerColumns.IMAGE));
