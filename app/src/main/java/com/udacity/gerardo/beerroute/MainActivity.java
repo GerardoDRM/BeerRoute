@@ -1,10 +1,12 @@
 package com.udacity.gerardo.beerroute;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Explode;
+import android.widget.ImageView;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
     }
 
     @Override
-    public void onItemSelected(Beer beer) {
+    public void onItemSelected(Beer beer, ImageView transition) {
         // create the shared transition animation
         Intent intent = new Intent(this, DetailActivity.class);
         Bundle mBundle = new Bundle();
@@ -48,19 +50,27 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
         intent.putExtras(mBundle);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setExitTransition(new Explode());
-//                    Bundle bundle = ActivityOptions
-//                            .makeSceneTransitionAnimation(mActivity, holder.mThumbnail, holder.mThumbnail.getTransitionName()).toBundle();
+                    Bundle bundle = ActivityOptions
+                            .makeSceneTransitionAnimation(this, transition, transition.getTransitionName()).toBundle();
 
-            startActivity(intent);
+            startActivity(intent, bundle);
         } else {
             startActivity(intent);
         }
     }
 
     @Override
-    public void onFavoriteSelected(Uri uri) {
+    public void onFavoriteSelected(Uri uri, ImageView transition) {
         Intent intent = new Intent(this, DetailActivity.class)
                 .setData(uri);
-        startActivity(intent);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setExitTransition(new Explode());
+            Bundle bundle = ActivityOptions
+                    .makeSceneTransitionAnimation(this, transition, transition.getTransitionName()).toBundle();
+
+            startActivity(intent, bundle);
+        } else {
+            startActivity(intent);
+        }
     }
 }

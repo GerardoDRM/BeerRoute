@@ -25,7 +25,7 @@
             android:layout_height="?attr/listPreferredItemHeight"
             android:layout_gravity="center_horizontal"
             android:scaleType="center"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/beer_logo"
             android:contentDescription="@string/app_name" />
         </android.support.v7.widget.Toolbar>
 

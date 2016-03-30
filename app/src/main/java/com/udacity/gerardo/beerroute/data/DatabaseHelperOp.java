@@ -43,6 +43,7 @@ public class DatabaseHelperOp {
 
         try {
             context.getContentResolver().applyBatch(BeerProvider.AUTHORITY, batchOperations);
+            Log.d(LOG_TAG, "Inserted");
         } catch (RemoteException | OperationApplicationException e) {
             Log.e(LOG_TAG, "Error applying batch insert", e);
         }

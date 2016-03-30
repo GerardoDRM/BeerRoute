@@ -80,8 +80,6 @@ public class RouteActivityFragment extends Fragment {
             }
         }
 
-
-
         return rootView;
     }
 

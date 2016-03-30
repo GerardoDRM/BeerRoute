@@ -59,7 +59,7 @@ public class BeerCursorAdapter extends CursorRecyclerViewAdapter<BeerCursorAdapt
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivityFragment.CallbackBeer) mContext).onFavoriteSelected(BeerProvider.Beers.withId(id));
+                ((MainActivityFragment.CallbackBeer) mContext).onFavoriteSelected(BeerProvider.Beers.withId(id), holder.mThumbnail);
             }
         });
     }

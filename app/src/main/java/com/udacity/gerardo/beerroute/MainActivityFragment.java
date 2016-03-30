@@ -8,8 +8,8 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -57,8 +58,8 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
 
     public interface CallbackBeer {
-        public void onItemSelected(Beer beer);
-        public void onFavoriteSelected(Uri uri);
+        public void onItemSelected(Beer beer, ImageView transition);
+        public void onFavoriteSelected(Uri uri, ImageView transition);
     }
 
     public MainActivityFragment() {
@@ -117,14 +118,22 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     private void setupRecyclerView() {
         mCursorAdapter = new BeerCursorAdapter(getActivity(), null);
         adapter = new CatalogAdapter(getActivity(), new ArrayList<Beer>());
-        mRecyclerView.setLayoutManager(new GridLayoutManager(mRecyclerView.getContext(), 2));
+        int columnCount = getResources().getInteger(R.integer.list_column_count);
+        StaggeredGridLayoutManager sglm =
+                new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(sglm);
         mRecyclerView.setAdapter(adapter);
         getBeers(0);
 
     }
 
     public void getFavorites() {
+        mCursorAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mCursorAdapter);
+        int columnCount = getResources().getInteger(R.integer.list_column_count);
+        StaggeredGridLayoutManager sglm =
+                new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(sglm);
     }
 
     public void getBeers(int elements) {
@@ -176,6 +185,8 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mCursorAdapter.swapCursor(data);
+        mCursorAdapter.setHasStableIds(true);
+
     }
 
     @Override

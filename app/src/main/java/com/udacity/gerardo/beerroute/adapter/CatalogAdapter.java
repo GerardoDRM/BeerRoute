@@ -63,7 +63,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivityFragment.CallbackBeer) mContext).onItemSelected(mBeers.get(position));
+                ((MainActivityFragment.CallbackBeer) mContext).onItemSelected(mBeers.get(position), holder.mThumbnail);
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.udacity.gerardo.beerroute;
 
 import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -24,6 +25,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -133,7 +135,15 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), RouteActivity.class);
                 i.putExtra(GeneralConst.BEER_KEY, mBeer.getId());
-                startActivity(i);
+                Bundle bundle = null;
+                // Adding Explode Exit Transition
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    getActivity().getWindow().setExitTransition(new Explode());
+                    bundle = ActivityOptions
+                            .makeSceneTransitionAnimation(getActivity()).toBundle();
+                }
+
+                getContext().startActivity(i, bundle);
             }
         });
         mShareAction.setIcon(R.drawable.ic_share_variant_white_24dp);
