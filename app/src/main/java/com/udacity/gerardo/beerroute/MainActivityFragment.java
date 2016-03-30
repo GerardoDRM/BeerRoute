@@ -1,9 +1,11 @@
 package com.udacity.gerardo.beerroute;
 
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,13 +13,18 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.udacity.gerardo.beerroute.API.BeerApi;
+import com.udacity.gerardo.beerroute.adapter.BeerCursorAdapter;
 import com.udacity.gerardo.beerroute.adapter.CatalogAdapter;
+import com.udacity.gerardo.beerroute.data.BeerProvider;
 import com.udacity.gerardo.beerroute.model.Beer;
 import com.udacity.gerardo.beerroute.model.BeerResult;
 import com.udacity.gerardo.beerroute.utils.GeneralConst;
@@ -45,14 +52,24 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     private String BASE_URL;
     private Retrofit retrofit;
     private BeerApi apiService;
+    private static final int CURSOR_LOADER_ID = 0;
+    private BeerCursorAdapter mCursorAdapter;
 
 
     public interface CallbackBeer {
         public void onItemSelected(Beer beer);
+        public void onFavoriteSelected(Uri uri);
     }
 
     public MainActivityFragment() {
         this.BASE_URL = GeneralConst.BASE_URL;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        getLoaderManager().initLoader(CURSOR_LOADER_ID, null, this);
+        super.onActivityCreated(savedInstanceState);
+
     }
 
     @Override
@@ -65,6 +82,12 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
                 .build();
 
         apiService = retrofit.create(BeerApi.class);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getLoaderManager().restartLoader(CURSOR_LOADER_ID, null, this);
     }
 
     @Override
@@ -92,12 +115,16 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     }
 
     private void setupRecyclerView() {
-//        mCursorAdapter = new MovieCursorAdapter(getActivity(), null);
+        mCursorAdapter = new BeerCursorAdapter(getActivity(), null);
         adapter = new CatalogAdapter(getActivity(), new ArrayList<Beer>());
         mRecyclerView.setLayoutManager(new GridLayoutManager(mRecyclerView.getContext(), 2));
         mRecyclerView.setAdapter(adapter);
         getBeers(0);
 
+    }
+
+    public void getFavorites() {
+        mRecyclerView.setAdapter(mCursorAdapter);
     }
 
     public void getBeers(int elements) {
@@ -121,17 +148,38 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Adding action to menu items
+        switch (item.getItemId()) {
+            case R.id.love:
+                getFavorites();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return null;
+        return new CursorLoader(getActivity(), BeerProvider.Beers.CONTENT_URI,
+                null,
+                null,
+                null,
+                null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-
+        mCursorAdapter.swapCursor(data);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        mCursorAdapter.swapCursor(null);
     }
 }

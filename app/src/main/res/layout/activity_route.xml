@@ -1,8 +1,4 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_route"
-    android:name="com.udacity.gerardo.beerroute.RouteActivityFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.udacity.gerardo.beerroute.RouteActivityFragment"
-    tools:layout="@layout/fragment_route" />
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/fragment_route"
+    tools:context=".RouteActivity" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:ignore="MergeRootFrame" />

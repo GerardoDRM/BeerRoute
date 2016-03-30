@@ -13,6 +13,8 @@
     <string name="share">Share</string>
     <string name="beer_circle">Circle Photo</string>
     <string name="beer_background">Beer Background</string>
+    <string name="action_favorites">Favorites</string>
+    <string name="transition_photo">transition</string>
 
 
 </resources>
