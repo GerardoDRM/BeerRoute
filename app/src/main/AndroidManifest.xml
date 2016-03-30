@@ -65,6 +65,11 @@
             android:enabled="true"
             android:exported="false"/>
 
+        <provider
+            android:authorities="com.udacity.gerardo.beerroute"
+            android:name=".data.generated.BeerProvider"
+            android:exported="false"/>
+
     </application>
 
 </manifest>
