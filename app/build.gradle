@@ -6,7 +6,7 @@ android {
         config {
             keyAlias 'Gerardo'
             keyPassword 'beerroute'
-            storeFile file('/home/gerardo/Documents/Business/Udacity/CapstoneStage1/Capstone/BeerRoute/keyStore.jks')
+            storeFile file('/home/gerardo/Documents/Business/Udacity/CapstoneStage1/Capstone/keyStore.jks')
             storePassword 'beerroute'
         }
     }
